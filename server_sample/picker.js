@@ -195,7 +195,7 @@ function onMouseDown() { mouseIsDown = true; }
 function onMouseUp() { mouseIsDown = false; }
 function onMouseMove(e) {
   if (mouseIsDown) {
-    console.log('dragginggg: ', color);
+    console.log('dragginggg...');
     if (updateTimer) {
       window.clearInterval(updateTimer);
     }
