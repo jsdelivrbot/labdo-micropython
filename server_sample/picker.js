@@ -201,7 +201,7 @@ function onMouseMove(e) {
     }
 
     updateTimer = window.setTimeout(function() {
-      console.log('sendinggg: ', color);
+      console.log('sendinggg...');
       updateTimer = null;
       var color = getColorAt(e.offsetX, e.offsetY);
       sendColorData(color);
