@@ -195,16 +195,18 @@ function onMouseDown() { mouseIsDown = true; }
 function onMouseUp() { mouseIsDown = false; }
 function onMouseMove(e) {
   if (mouseIsDown) {
+    console.log('dragginggg: ', color);
     if (updateTimer) {
       window.clearInterval(updateTimer);
     }
 
     updateTimer = window.setTimeout(function() {
+      console.log('sendinggg: ', color);
       updateTimer = null;
       var color = getColorAt(e.offsetX, e.offsetY);
       sendColorData(color);
       console.log('color: ', color);
-    }, 100);
+    }, 30);
   }
 }
 
