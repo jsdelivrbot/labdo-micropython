@@ -13,6 +13,9 @@ def setColor(r,g,b):
 	np[3] = (r, g, b)
 	np.write()
 
+setColor(0, 0, 0)
+
+print("Starting Server...")
 while True:
 	conn, addr = s.accept()
 	print("Got a connection from %s" % str(addr))
@@ -30,6 +33,9 @@ while True:
 		print("Color =", r,g,b)
 		setColor(r,g,b)
 		conn.send(str(r) + ',' + str(g) + ',' + str(b))
+	elif request.find('picker.js') > 0:
+		with open('picker.js', 'r') as js:
+			conn.send(js.read())
 	else:
 		with open('index.html', 'r') as html:
 			conn.send(html.read())

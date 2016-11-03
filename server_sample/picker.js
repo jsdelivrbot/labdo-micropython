@@ -6,15 +6,15 @@ function parseResponse(data) {
   return [parseInt(dataParts[0]), parseInt(dataParts[1]), parseInt(dataParts[2])];
 }
 
-function sendColorData(color {
-  var xmlhttp = new XMLHttpRequest(
+function sendColorData(color) {
+  var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			var color = parseResponse(xmlhttp.responseText);
 			console.log('RECV:', color);
       updateIndicator(color);
 		}
-	}
+	};
 
   xmlhttp.open("GET", "Color=" + color.join(','), true);
   xmlhttp.send();
