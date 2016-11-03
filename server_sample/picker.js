@@ -190,12 +190,20 @@ function onClick(e) {
 }
 
 var mouseIsDown = false;
+var updateTimer = null;
 function onMouseDown() { mouseIsDown = true; }
 function onMouseUp() { mouseIsDown = false; }
 function onMouseMove(e) {
   if (mouseIsDown) {
-    var color = getColorAt(e.offsetX, e.offsetY);
-    sendColorData(color);
+    if (updateTimer) {
+      window.clearInterval(updateTimer);
+    }
+
+    updateTimer = window.setInterval(function() {
+      updateTimer = null;
+      var color = getColorAt(e.offsetX, e.offsetY);
+      sendColorData(color);
+    }, 100);
   }
 }
 
