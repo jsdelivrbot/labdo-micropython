@@ -1,20 +1,23 @@
 import machine, neopixel, time
 
-np = neopixel.NeoPixel(machine.Pin(0), 4)
+numberOfLEDs = 96
+
+np = neopixel.NeoPixel(machine.Pin(4), numberOfLEDs)
 
 pos = 0
 while True:
-	for n in range(4): # 0..3
-		if n == pos:
-			np[n] = (255, 255, 255)
-		else:
-			np[n] = (50, 0, 0)
-	
+	if machine.Pin(0, machine.Pin.IN).value() == 0:
+		for n in range(numberOfLEDs):
+			if n == pos:
+				np[n] = (0, 255, 0)
+			else:
+				np[n] = (50, 0, 0)
+	else:
+		for n in range(numberOfLEDs):
+			if n == pos:
+				np[n] = (255, 255, 255)
+			else:
+				np[n] = (50, 0, 0)
 	np.write()
 	pos = (pos + 1) % 4
-	time.sleep_ms(1000)
-
-
-
-
-if machine.Pin(0, machine.Pin.IN).value() == 0:
+	time.sleep_ms(10)

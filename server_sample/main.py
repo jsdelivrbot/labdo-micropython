@@ -4,13 +4,13 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(('', 80))
 s.listen(0)
 
-np = neopixel.NeoPixel(machine.Pin(4), 4)
+numberOfLeds = 96
+
+np = neopixel.NeoPixel(machine.Pin(4), numberOfLeds)
 
 def setColor(r,g,b):
-	np[0] = (r, g, b)
-	np[1] = (r, g, b)
-	np[2] = (r, g, b)
-	np[3] = (r, g, b)
+	for i in range(numberOfLeds):
+		np[i] = (r, g, b)
 	np.write()
 
 setColor(0, 0, 0)
