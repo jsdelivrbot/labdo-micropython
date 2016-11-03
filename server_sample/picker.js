@@ -199,10 +199,11 @@ function onMouseMove(e) {
       window.clearInterval(updateTimer);
     }
 
-    updateTimer = window.setInterval(function() {
+    updateTimer = window.setTimeout(function() {
       updateTimer = null;
       var color = getColorAt(e.offsetX, e.offsetY);
       sendColorData(color);
+      console.log('color: ', color);
     }, 100);
   }
 }
@@ -217,7 +218,6 @@ function init() {
   document.addEventListener('mousedown', onMouseDown);
   document.addEventListener('mousemove', onMouseMove);
   window.addEventListener('mouseup', onMouseUp);
-  document.addEventListener('click', onClick);
 }
 
 init();
