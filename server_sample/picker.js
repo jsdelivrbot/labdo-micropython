@@ -189,6 +189,25 @@ function onClick(e) {
   console.log('color: ', color);
 }
 
+var mouseIsDown = false;
+var updateTimer = null;
+function onMouseDown() { mouseIsDown = true; }
+function onMouseUp() { mouseIsDown = false; }
+function onMouseMove(e) {
+  if (mouseIsDown) {
+    if (updateTimer) {
+      window.clearInterval(updateTimer);
+    }
+
+    updateTimer = window.setTimeout(function() {
+      updateTimer = null;
+      var color = getColorAt(e.offsetX, e.offsetY);
+      sendColorData(color);
+      console.log('color: ', color);
+    }, 100);
+  }
+}
+
 function init() {
   initDocumentStyles();
 
@@ -196,7 +215,9 @@ function init() {
   createColorpicker(container);
   createIndicator(container);
 
-  document.addEventListener('click', onClick);
+  document.addEventListener('mousedown', onMouseDown);
+  document.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('mouseup', onMouseUp);
 }
 
 init();
