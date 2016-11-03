@@ -189,6 +189,16 @@ function onClick(e) {
   console.log('color: ', color);
 }
 
+var mouseIsDown = false;
+function onMouseDown() { mouseIsDown = true; }
+function onMouseUp() { mouseIsDown = false; }
+function onMouseMove(e) {
+  if (mouseIsDown) {
+    var color = getColorAt(e.offsetX, e.offsetY);
+    sendColorData(color);
+  }
+}
+
 function init() {
   initDocumentStyles();
 
@@ -196,6 +206,9 @@ function init() {
   createColorpicker(container);
   createIndicator(container);
 
+  document.addEventListener('mousedown', onMouseDown);
+  document.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('mouseup', onMouseUp);
   document.addEventListener('click', onClick);
 }
 
